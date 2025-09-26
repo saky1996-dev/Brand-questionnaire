@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en" class="scroll-smooth"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Interactive Branding Brief&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Chosen Palette: Corporate Minimalist --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Application Structure Plan: The application transforms the linear markdown brief into a professional, single-page interactive form. A sticky side-navigation allows users to easily jump between sections, improving on the simple scroll of a document. The structure uses distinct, card-like sections for each part of the brief, making the information architecture clear and digestible. This design was chosen to make the daunting task of filling out a brief feel more organized, engaging, and less overwhelming for the client, guiding them through the process step-by-step in a visually pleasing interface. --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Visualization &amp; Content Choices: Since the source is a template, not a data report, traditional charts are not applicable. Instead, 'visualization' is achieved through UI/UX design. Report Info (e.g., 'Keywords/Visual Cues') -&gt; Goal (Gather aesthetic preferences) -&gt; Presentation Method (Interactive clickable tags) -&gt; Interaction (User clicks to select/deselect keywords) -&gt; Justification (More intuitive and less open-ended than a blank text field, guiding the user towards common concepts) -&gt; Library/Method (Vanilla JS and Tailwind CSS). Checkboxes are used for 'Deliverables' to provide a clear, tappable list of options. The entire application serves as an interactive infographic for the briefing process. --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: Arial, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-link.active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #F3F4F6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #1F2937;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.form-input {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.form-input:focus {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #6366F1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tag {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.2s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tag.selected {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #4F46E5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.05);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.checkbox-label {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.2s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.checkbox-label.checked {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #ECFDF5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #10B981;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #047857;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.modal {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.modal.open {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="bg-gray-100 text-gray-800"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;header class="text-center mb-10"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight"&gt;Interactive Branding Brief&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="mt-2 text-lg text-gray-600"&gt;Please fill out the following sections to help us understand your vision.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="grid md:grid-cols-4 gap-12"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;aside class="md:col-span-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;nav id="side-nav" class="sticky top-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;ul class="space-y-2 font-medium text-gray-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;a href="#section-1" class="nav-link block w-full text-left px-4 py-2 rounded-md hover:bg-gray-200 transition-colors"&gt;1. Project Overview&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;a href="#section-2" class="nav-link block w-full text-left px-4 py-2 rounded-md hover:bg-gray-200 transition-colors"&gt;2. About the Brand&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;a href="#section-3" class="nav-link block w-full text-left px-4 py-2 rounded-md hover:bg-gray-200 transition-colors"&gt;3. Competitors&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;a href="#section-4" class="nav-link block w-full text-left px-4 py-2 rounded-md hover:bg-gray-200 transition-colors"&gt;4. Design &amp; Visuals&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;a href="#section-5" class="nav-link block w-full text-left px-4 py-2 rounded-md hover:bg-gray-200 transition-colors"&gt;5. Final Notes&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/nav&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/aside&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;main id="main-content" class="md:col-span-3 space-y-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;form id="branding-brief-form"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;section id="section-1" class="brief-section p-8 bg-white rounded-xl shadow-lg border border-gray-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-2xl font-bold mb-6 text-gray-900"&gt;1. Introduction &amp; Project Overview&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label for="project-title" class="block text-sm font-medium text-gray-700 mb-1"&gt;Project Title&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;input type="text" id="project-title" name="project-title" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="grid sm:grid-cols-2 gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label for="client-name" class="block text-sm font-medium text-gray-700 mb-1"&gt;Client Name&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input type="text" id="client-name" name="client-name" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label for="date" class="block text-sm font-medium text-gray-700 mb-1"&gt;Date&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input type="date" id="date" name="date" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label for="project-goal" class="block text-sm font-medium text-gray-700 mb-1"&gt;Project Goal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;textarea id="project-goal" name="project-goal" rows="4" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500" placeholder="e.g., Launching a new company, rebranding an existing one..."&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;section id="section-2" class="brief-section p-8 bg-white rounded-xl shadow-lg border border-gray-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-2xl font-bold mb-6 text-gray-900"&gt;2. About the Brand&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label for="brand-name" class="block text-sm font-medium text-gray-700 mb-1"&gt;Brand Name&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;input type="text" id="brand-name" name="brand-name" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label for="mission-statement" class="block text-sm font-medium text-gray-700 mb-1"&gt;Brand's Mission Statement&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;textarea id="mission-statement" name="mission-statement" rows="3" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500" placeholder="What is the core purpose of your brand?"&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label for="target-audience" class="block text-sm font-medium text-gray-700 mb-1"&gt;Target Audience&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;textarea id="target-audience" name="target-audience" rows="4" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500" placeholder="Describe your ideal customer (demographics, interests, pain points)."&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label for="brand-values" class="block text-sm font-medium text-gray-700 mb-1"&gt;Brand Values&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;textarea id="brand-values" name="brand-values" rows="3" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500" placeholder="What are the fundamental principles that guide your brand?"&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label for="brand-personality" class="block text-sm font-medium text-gray-700 mb-1"&gt;Brand Personality &amp; Tone of Voice&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;textarea id="brand-personality" name="brand-personality" rows="3" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500" placeholder="If your brand were a person, how would you describe it? (e.g., professional, playful, adventurous)"&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;section id="section-3" class="brief-section p-8 bg-white rounded-xl shadow-lg border border-gray-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-2xl font-bold mb-6 text-gray-900"&gt;3. Competitor Landscape&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label for="main-competitors" class="block text-sm font-medium text-gray-700 mb-1"&gt;Main Competitors&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;textarea id="main-competitors" name="main-competitors" rows="3" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500" placeholder="List your top 3-5 direct competitors."&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label for="unique-selling-prop" class="block text-sm font-medium text-gray-700 mb-1"&gt;What sets you apart?&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;textarea id="unique-selling-prop" name="unique-selling-prop" rows="4" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500" placeholder="What is your unique selling proposition?"&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/section&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;section id="section-4" class="brief-section p-8 bg-white rounded-xl shadow-lg border border-gray-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-2xl font-bold mb-6 text-gray-900"&gt;4. Design &amp; Visuals&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label class="block text-sm font-medium text-gray-700 mb-2"&gt;Keywords/Visual Cues&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-gray-500 mb-3"&gt;Select keywords that describe your desired visual style. You can also add your own.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex flex-wrap gap-3" id="keyword-tags"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Minimal&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Modern&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Vintage&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Organic&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Bold&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Luxurious&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Playful&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;input type="hidden" name="keywords" id="keywords-input"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;input type="text" class="form-input mt-4 block w-full border-gray-300 rounded-lg shadow-sm p-3" placeholder="Add custom keywords, separated by commas"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label for="visual-references" class="block text-sm font-medium text-gray-700 mb-1"&gt;Visual References&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;textarea id="visual-references" name="visual-references" rows="4" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3" placeholder="Please provide links or images of logos, websites, or other designs you like and explain why."&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label for="color-preferences" class="block text-sm font-medium text-gray-700 mb-1"&gt;Color Preferences&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;textarea id="color-preferences" name="color-preferences" rows="3" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3" placeholder="Are there any colors you love, hate, or feel strongly about incorporating?"&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label class="block text-sm font-medium text-gray-700 mb-2"&gt;Typography&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-gray-500 mb-3"&gt;Any preferences for fonts?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex flex-wrap gap-3" id="typography-tags"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Elegant&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Handwritten&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Sans-serif&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Bold&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"&gt;Classic Serif&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;input type="hidden" name="typography" id="typography-input"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label class="block text-sm font-medium text-gray-700 mb-2"&gt;Deliverables&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-gray-500 mb-3"&gt;What specific design assets do you need?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="grid grid-cols-2 sm:grid-cols-3 gap-4" id="deliverables-checkboxes"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="checkbox-label flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer"&gt;&lt;input type="checkbox" name="deliverables" value="Primary Logo" class="h-5 w-5 text-indigo-600 border-gray-300 rounded mr-3 focus:ring-indigo-500"&gt; &lt;span class="text-gray-800"&gt;Primary Logo&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="checkbox-label flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer"&gt;&lt;input type="checkbox" name="deliverables" value="Secondary Logo" class="h-5 w-5 text-indigo-600 border-gray-300 rounded mr-3 focus:ring-indigo-500"&gt; &lt;span class="text-gray-800"&gt;Secondary Logo&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="checkbox-label flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer"&gt;&lt;input type="checkbox" name="deliverables" value="Brand Guidelines" class="h-5 w-5 text-indigo-600 border-gray-300 rounded mr-3 focus:ring-indigo-500"&gt; &lt;span class="text-gray-800"&gt;Brand Guidelines&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="checkbox-label flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer"&gt;&lt;input type="checkbox" name="deliverables" value="Social Media Kit" class="h-5 w-5 text-indigo-600 border-gray-300 rounded mr-3 focus:ring-indigo-500"&gt; &lt;span class="text-gray-800"&gt;Social Media Kit&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="checkbox-label flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer"&gt;&lt;input type="checkbox" name="deliverables" value="Business Card" class="h-5 w-5 text-indigo-600 border-gray-300 rounded mr-3 focus:ring-indigo-500"&gt; &lt;span class="text-gray-800"&gt;Business Card&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="checkbox-label flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer"&gt;&lt;input type="checkbox" name="deliverables" value="Website Mockups" class="h-5 w-5 text-indigo-600 border-gray-300 rounded mr-3 focus:ring-indigo-500"&gt; &lt;span class="text-gray-800"&gt;Website Mockups&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/section&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;section id="section-5" class="brief-section p-8 bg-white rounded-xl shadow-lg border border-gray-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-2xl font-bold mb-6 text-gray-900"&gt;5. Additional Notes &amp; Information&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;label for="additional-notes" class="block text-sm font-medium text-gray-700 mb-1"&gt;Is there anything else we should know?&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;textarea id="additional-notes" name="additional-notes" rows="5" class="form-input block w-full border-gray-300 rounded-lg shadow-sm p-3 focus:border-indigo-500 focus:ring-indigo-500" placeholder="Any special requests, technical constraints, or long-term goals?"&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mt-12 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button type="submit" class="bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105"&gt;Submit Brief&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/form&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/main&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="success-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 transition-opacity duration-300 opacity-0 ease-in"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-white rounded-xl p-8 shadow-2xl max-w-sm w-full mx-4 transform scale-95 transition-transform duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 class="text-2xl font-bold text-gray-900 mb-4 text-center"&gt;Submission Successful&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-gray-600 text-center"&gt;Thank you for submitting the brief! We will review the information and get back to you shortly.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mt-6 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button id="close-modal" class="bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105"&gt;Close&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.addEventListener('DOMContentLoaded', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const sections = document.querySelectorAll('.brief-section');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const navLinks = document.querySelectorAll('.nav-link');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const successModal = document.getElementById('success-modal');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const closeModalBtn = document.getElementById('close-modal');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const observerOptions = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>root: null,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>rootMargin: '0px',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>threshold: 0.4<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const observer = new IntersectionObserver((entries) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>entries.forEach(entry =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (entry.isIntersecting) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>navLinks.forEach(link =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>link.classList.remove('active');</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (link.getAttribute('href').substring(1) === entry.target.id) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>link.classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, observerOptions);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>sections.forEach(section =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>observer.observe(section);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function setupTagSelection(containerId, hiddenInputId) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const container = document.getElementById(containerId);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const hiddenInput = document.getElementById(hiddenInputId);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let selectedTags = [];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>container.addEventListener('click', (event) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const tag = event.target.closest('.tag');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (tag) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tag.classList.toggle('selected');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const tagValue = tag.textContent.trim();</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (tag.classList.contains('selected')) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (!selectedTags.includes(tagValue)) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>selectedTags.push(tagValue);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>selectedTags = selectedTags.filter(t =&gt; t !== tagValue);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>hiddenInput.value = selectedTags.join(', ');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>setupTagSelection('keyword-tags', 'keywords-input');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setupTagSelection('typography-tags', 'typography-input');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const checkboxContainer = document.getElementById('deliverables-checkboxes');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>checkboxContainer.addEventListener('change', (event) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(event.target.type === 'checkbox') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const label = event.target.closest('.checkbox-label');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if(event.target.checked) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>label.classList.add('checked');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>label.classList.remove('checked');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const form = document.getElementById('branding-brief-form');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>form.addEventListener('submit', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>successModal.classList.add('open');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>successModal.style.opacity = '1';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>successModal.querySelector('div').style.transform = 'scale(1)';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>closeModalBtn.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>successModal.style.opacity = '0';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>successModal.querySelector('div').style.transform = 'scale(0.95)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>successModal.classList.remove('open');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}, 300);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const today = new Date().toISOString().split('T')[0];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('date').value = today;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
